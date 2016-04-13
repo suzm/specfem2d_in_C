@@ -1,0 +1,43 @@
+  \documentclass{book}
+  \usepackage{amsmath}
+  \titlepage
+  \title{2D Spectral Element Method}
+  \begin{document}
+  %\chapter{}
+  %\section{General Introduciton}
+  The displacement field $\boldsymbol{s}$ is produced by an earthquake is governed by the momentum equation,
+  \begin{equation}
+  \rho\,\partial_t^2\boldsymbol{s}=\boldsymbol{\nabla}\cdot\boldsymbol{T}+\boldsymbol{f}
+  \end{equation}
+  The weak form of above equation is produced by dotting the momentum equation with an arbitrary test vector $\boldsymbol{w}$, integrating by the model volume $\Omega$. (We neglect boundary condition for the temporary)
+  \begin{align*}
+  &\int_\Omega \boldsymbol{\nabla}\cdot\boldsymbol{T}\cdot w(\boldsymbol{x})\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \Sigma _{i=1}^3\int_\Omega w_i(\boldsymbol{x})\nabla\cdot\boldsymbol{T}_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \Sigma_{i=1}^3\int_\Omega \nabla\cdot(w_i(\boldsymbol{x})\boldsymbol{T}_i) - \nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = -\Sigma_{i=1}^3\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^3\boldsymbol x
+  \end{align*}
+The Source function is 
+\begin{equation}
+ \boldsymbol{f} = -\boldsymbol{M}\cdot\boldsymbol\nabla\delta(\boldsymbol x-\boldsymbol x_s)S(t)
+\end{equation}
+Using the properties fo Dirac delta distribution,after integration, it transformed in the following way,
+\begin{align*}
+ &\int_\Omega \boldsymbol f\cdot \boldsymbol w\;\mathrm{d}^3\boldsymbol x\\
+ &= -S(t)\int_\Omega\boldsymbol{M}\cdot \boldsymbol\nabla\delta(\boldsymbol x-\boldsymbol x_s)\cdot \boldsymbol w\;\mathrm{d}^3\boldsymbol x\\
+ &= \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
+\end{align*}
+
+In 2 dimension, We use equation like this ?? I can derive this using Green Formula, But I don't know if it's right. 
+\begin{equation}
+ \int_\Omega \rho\,\boldsymbol w\cdot \partial_t^2\boldsymbol s\;\mathrm{d}^2\boldsymbol x = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^2\boldsymbol x + \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
+\end{equation}
+
+
+
+
+
+
+
+
+  \end{document}
