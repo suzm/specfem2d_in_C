@@ -5,17 +5,19 @@
   \begin{document}
   %\chapter{}
   %\section{General Introduciton}
-  The displacement field $\boldsymbol{s}$ is produced by an earthquake is governed by the momentum equation,
+  The primiary goal of this introduciton is to demonstrate how to implement spectral element method in 2d. We seek to produce the displacement field caused by an eqrthquake in a finite eqrth model with volume $\Omega$. In order to simplify caculation, we just use stress-free boundary condition.  We will  talk about artifical absorbing  boundary condition in detail later.
+  The displacement field $\boldsymbol{u}$ is produced by an earthquake is governed by the momentum equation,
   \begin{equation}
-  \rho\,\partial_t^2\boldsymbol{s}=\boldsymbol{\nabla}\cdot\boldsymbol{T}+\boldsymbol{f}
+  \rho\,\partial_t^2\boldsymbol{u}=\boldsymbol{\nabla}\cdot\boldsymbol{T}+\boldsymbol{f}
   \end{equation}
   ,where $\boldsymbol T =(\boldsymbol T_1,\boldsymbol T_2,\boldsymbol T_3)^T$, and $\boldsymbol T_i$ is vector function.
-  The weak form of above equation is produced by dotting the momentum equation with an arbitrary test vector $\boldsymbol{w}=(w_1(\boldsymbol x),w_2(\boldsymbol x),w_3(\boldsymbol x))^T $, integrating by the model volume $\Omega$. (We neglect boundary condition for the temporary)
+  The weak form of above equation is produced by dotting the momentum equation with an arbitrary test vector $\boldsymbol{w}=(w_1(\boldsymbol x),w_2(\boldsymbol x),w_3(\boldsymbol x))^T $, integrating by the model volume $\Omega$. Since we use stress-free boundary condition, which is easy to derive the weak form of wave equation, we have $\boldsymbol T|_{\partial \Omega} = 0$
   \begin{equation}
   \begin{aligned}
   &\int_\Omega \boldsymbol{\nabla}\cdot\boldsymbol{T}\cdot w(\boldsymbol{x})\;\mathrm{d}^3\boldsymbol{x}\\
   & = \Sigma _{i=1}^3\int_\Omega w_i(\boldsymbol{x})\nabla\cdot\boldsymbol{T}_i\;\mathrm{d}^3\boldsymbol{x}\\
   & = \Sigma_{i=1}^3\int_\Omega \nabla\cdot(w_i(\boldsymbol{x})\boldsymbol{T}_i) - \nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \Sigma_{i=1}^3\left(\int_{\partial\Omega} w_i(\boldsymbol{x})\boldsymbol T_i \cdot \;\mathrm{d}\boldsymbol{s}-\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x} \right)\\
   & = -\Sigma_{i=1}^3\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
   & = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^3\boldsymbol x
   \end{aligned}
@@ -36,7 +38,7 @@ Using the properties fo Dirac delta distribution,after integration, it transform
 
 In 2 dimension, We use equation like this ?? I can derive this using Green Formula, But I don't know if it's right. 
 \begin{equation}
- \int_\Omega \rho\,\boldsymbol w\cdot \partial_t^2\boldsymbol s\;\mathrm{d}^2\boldsymbol x = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^2\boldsymbol x + \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
+ \int_\Omega \rho\,\boldsymbol w\cdot \partial_t^2\boldsymbol u\;\mathrm{d}^2\boldsymbol x = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^2\boldsymbol x + \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
 \end{equation}
 
 
