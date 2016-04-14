@@ -5,7 +5,7 @@
   \begin{document}
   %\chapter{}
   %\section{General Introduciton}
-  The primiary goal of this introduciton is to demonstrate how to implement spectral element method in 2d. We seek to produce the displacement field caused by an eqrthquake in a finite eqrth model with volume $\Omega$. In order to simplify caculation, we just use stress-free boundary condition.  We will  talk about artifical absorbing  boundary condition in detail later.
+  The primary goal of this introduction is to demonstrate how to implement spectral element method in 2d. We seek to produce the displacement field caused by an earthquake in a finite earth model with volume $\Omega$. In order to simplify calculation, we just use stress-free boundary condition.  We will  talk about artificial absorbing  boundary condition in detail later.
   The displacement field $\boldsymbol{u}$ is produced by an earthquake is governed by the momentum equation,
   \begin{equation}
   \rho\,\partial_t^2\boldsymbol{u}=\boldsymbol{\nabla}\cdot\boldsymbol{T}+\boldsymbol{f}
@@ -27,7 +27,7 @@ The Source function is
 \begin{equation}
  \boldsymbol{f} = -\boldsymbol{M}\cdot\boldsymbol\nabla\delta(\boldsymbol x-\boldsymbol x_s)S(t)
 \end{equation}
-Using the properties fo Dirac delta distribution,after integration, it transformed in the following way,
+Using the properties of Dirac delta distribution,after integration, it transformed in the following way,
 \begin{equation}
 \begin{aligned}
  &\int_\Omega \boldsymbol f\cdot \boldsymbol w\;\mathrm{d}^3\boldsymbol x\\
