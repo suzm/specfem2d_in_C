@@ -10,13 +10,14 @@ int main()
 	const int nod_wid_num = col_ele_num + 1;
 	const int nod_dep_num = row_ele_num + 1;
 	
-	const	double ele_wid_average = (double)region_depth / col_ele_num;
+	const double ele_wid_average = (double)region_depth / col_ele_num;
 	const double ele_dep_average = (double)region_depth / row_ele_num;
 	double nod_x = 0;
 	double nod_y = 0;
 	//char line_temp[30], *ptr;
 	int nod_index = 1;
-	int nod_mat[201][201];
+	//int nod_mat[201][201];
+	int nod_mat[nod_wid_num][nod_dep_num];
 	fprintf(fp, "nod location:\n");
 	for (int i = 0; i < nod_wid_num; i++) {
 		nod_y = 0;

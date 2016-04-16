@@ -15,10 +15,10 @@
   \begin{equation}
   \begin{aligned}
   &\int_\Omega \boldsymbol{\nabla}\cdot\boldsymbol{T}\cdot\boldsymbol w(\boldsymbol{x})\;\mathrm{d}^3\boldsymbol{x}\\
-  & = \Sigma _{i=1}^3\int_\Omega w_i(\boldsymbol{x})\nabla\cdot\boldsymbol{T}_i\;\mathrm{d}^3\boldsymbol{x}\\
-  & = \Sigma_{i=1}^3\int_\Omega \nabla\cdot(w_i(\boldsymbol{x})\boldsymbol{T}_i) - \nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
-  & = \Sigma_{i=1}^3\left(\int_{\partial\Omega} w_i(\boldsymbol{x})\boldsymbol T_i \cdot \;\mathrm{d}\boldsymbol{s}-\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x} \right)\\
-  & = -\Sigma_{i=1}^3\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \sum _{i=1}^3\int_\Omega w_i(\boldsymbol{x})\nabla\cdot\boldsymbol{T}_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \sum_{i=1}^3\int_\Omega \nabla\cdot(w_i(\boldsymbol{x})\boldsymbol{T}_i) - \nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
+  & = \sum_{i=1}^3\left(\int_{\partial\Omega} w_i(\boldsymbol{x})\boldsymbol T_i \cdot \;\mathrm{d}\boldsymbol{s}-\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x} \right)\\
+  & = -\sum_{i=1}^3\int_\Omega\nabla w_i(\boldsymbol x) \cdot\boldsymbol T_i\;\mathrm{d}^3\boldsymbol{x}\\
   & = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^3\boldsymbol x
   \end{aligned}
   \end{equation}
@@ -40,7 +40,22 @@ In 2 dimension, We can derive this using Green Formula.
 \begin{equation}
  \int_\Omega \rho\,\boldsymbol w\cdot \partial_t^2\boldsymbol u\;\mathrm{d}^2\boldsymbol x = -\int_\Omega \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^2\boldsymbol x + \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
 \end{equation}
-In the following parts, we will explain the general procedure of 
+In the following parts, we will explain the general procedure of specfem.
+
+First, we divide the region into  a number of non-overlapping elements, $\Omega_e$, $e=1, \ldots, n_e$, such that $\Omega=\bigcup_e^{n_e}\Omega_e$, as shown in Fig.1. In SEM, the shape of element is restricted to quadrilateral. The integration in the whole region become the sum of integration over every element, as shown below.
+\begin{equation}
+ \sum_e^{n_e}\int_{\Omega_e}  \rho\,\boldsymbol w\cdot \partial_t^2\boldsymbol u\;\mathrm{d}^2\boldsymbol x = -\sum_e^{n_e}\int_{\Omega_e} \boldsymbol{\nabla}\boldsymbol w(\boldsymbol x): \boldsymbol T\;\mathrm{d}^2\boldsymbol x + \boldsymbol{M}:\boldsymbol{\nabla w}(\boldsymbol x_s)S (t)
+\end{equation}
+
+Since the equation holds for any test function $\boldsymbol w$, we can use $\boldsymbol w$ to extract the value of displacement$\boldsymbol u$ at one point by setting $w$ equals 1 at this point and equals 0 at other points. It's undoubted that this kind of $\boldsymbol w$ did exist. Using Gauss-Lobatto-Legendre points, the integration become the forms like below:
+\begin{equation}
+ M\ddot U+K = F,
+\end{equation}
+where $M$ denotes the global mass matrix, $K$ the global stiffness matrix and $F$ the source term.
+Let's build the mass matrix $M$ first. According the quadrature, we can know that the mass matrix is diagonal. 
+
+
+
 
 
 
