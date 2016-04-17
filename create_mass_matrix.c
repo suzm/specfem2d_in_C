@@ -1,6 +1,10 @@
 #include <stdio.h>
-int main(int argc, char const *argv[])
+#define N 4
+#define rho 30000
+#define J 2
+
+int create_mass_matrix(int argc, char const *argv[])
 {
-	/* code */
+	
 	return 0;
 }

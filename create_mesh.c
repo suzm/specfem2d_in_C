@@ -1,8 +1,8 @@
 #include <stdio.h>
 #define region_width 100
 #define region_depth 100
-#define col_ele_num 200
-#define row_ele_num 200
+#define col_ele_num 20
+#define row_ele_num 20
 int main()
 {
 	char mesh_name[] = "specfem2d_mesh";
