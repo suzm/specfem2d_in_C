@@ -1,5 +1,6 @@
   \documentclass{book}
   \usepackage{amsmath}
+  \usepackage{mathrsfs}
   \titlepage
   \title{2D Spectral Element Method}
   \begin{document}
@@ -53,6 +54,17 @@ Since the equation holds for any test function $\boldsymbol w$, we can use $\bol
 \end{equation}
 where $M$ denotes the global mass matrix, $K$ the global stiffness matrix and $F$ the source term.
 Let's build the mass matrix $M$ first. According the quadrature, we can know that the mass matrix is diagonal. 
+\begin{equation}
+ \begin{aligned}
+ &\int_{\Omega_e}\rho\boldsymbol w \cdot\partial_t^2\boldsymbol s\;\mathrm{d}\boldsymbol x\\
+ &\approx \sum_{\alpha',\beta'}\omega_{\alpha'}\omega_{\beta'}\boldsymbol J_e^{\alpha'\beta'}\rho^{\alpha'\beta'}\sum_{i,j=1}^2\hat{\boldsymbol x}_i\cdot\hat{\boldsymbol x}_j\\
+ &\qquad\times\sum_{\alpha,\beta}w_i^{\alpha\beta}\ell_\alpha(\xi_{\alpha'})\ell_\beta(\eta_{\beta'})\sum_{\sigma\tau}\ddot s_j^{\sigma\tau}(t)\ell_\sigma(\xi_{\alpha'})\ell_\tau(\eta_{\beta'})\\
+ &=\sum_{\alpha',\beta'}\omega_{\alpha'}\omega_{\beta'}\boldsymbol J_e^{\alpha'\beta'}\rho^{\alpha'\beta'}\sum_{i,j}^{3}\delta_{ij}\sum_{\alpha,\beta}w_i^{\alpha\beta}\delta_{\alpha\alpha'}\delta_{\beta\beta'}\\
+ &\qquad\times \sum_{\sigma\tau}\ddot s_j^{\sigma\tau}(t)\delta_{\sigma\alpha'}\delta_{\tau\beta'}\\
+ &=\sum_{\alpha,\beta}\omega_{\alpha}\omega_{\beta}\boldsymbol J_e^{\alpha\beta}\rho^{\alpha\beta}\sum_{i=1}^{2}w_i^{\alpha\beta}\ddot s_{i}^{\alpha\beta}(t)
+\end{aligned}
+\end{equation}
+
 
 
 
