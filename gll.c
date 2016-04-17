@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <string.h>
+#include "specfem2d.h"
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w)
 {
 	
@@ -26,16 +25,16 @@ int  get_gll_points_weight(int order, double *gll_p, double *gll_w)
 	
 }
 // int *gll_weights(int order)
-int main(int argc, char const *argv[])
-{
-	int order = 8;
-	double gll_p[order+1];
-	double gll_w[order+1];
-	if (get_gll_points_weight(order, gll_p, gll_w)){
-		int i=0;
-		do
-			printf("%e\t\t%e\n",gll_p[i], gll_w[i]);
-		while(i++ < order );
-	}
-	return 0;
-}
+// int main(int argc, char const *argv[])
+// {
+// 	int order = 8;
+// 	double gll_p[order+1];
+// 	double gll_w[order+1];
+// 	if (get_gll_points_weight(order, gll_p, gll_w)){
+// 		int i=0;
+// 		do
+// 			printf("%e\t\t%e\n",gll_p[i], gll_w[i]);
+// 		while(i++ < order );
+// 	}
+// 	return 0;
+// }
