@@ -12,5 +12,6 @@
 #define NGLLZ 5
 
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
+double legendre(double x);
 int create_mass_matrix( const double Je, const int NGlob, double *mass_vector);
 int ele_to_node(int rei, int cei, int *node_list );

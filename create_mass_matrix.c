@@ -70,6 +70,7 @@ int create_mass_matrix( const double Je, const int NGlob, double *mass_vector)
 		}
 		
 	}
+	/*
 	int index = 0;
 	FILE *fp = fopen("mass","w");
 	for(int i = 0; i < (NZ*(NGLLZ-1)+1); ++i){
@@ -86,6 +87,7 @@ int create_mass_matrix( const double Je, const int NGlob, double *mass_vector)
 		index += (NX*(NGLLX-1)+1)*2;
 	}
 	fclose(fp);
+	*/
 	// fclose(fp);
 	return 1;
 }

@@ -24,6 +24,24 @@ int  get_gll_points_weight(int order, double *gll_p, double *gll_w)
 	return 1;
 	
 }
+double legendre(double x)
+{
+	double  legen_list[NSPEC+1];
+	double res = 0;
+	switch (NSPEC) {
+		case 0: 
+			res = 1; break;
+		case 1: 
+			res = x; break;
+		default: 
+			legen_list[0] = 1; 
+			legen_list[1] = x;
+			for(int i=2; i<=NSPEC; i++)
+				legen_list[i] = ((2*i-1)*x*legen_list[i-1]-(i-1)*legen_list[i-2])/i;
+			res = legen_list[NSPEC];
+	}
+	return res;
+}
 // int *gll_weights(int order)
 // int main(int argc, char const *argv[])
 // {
