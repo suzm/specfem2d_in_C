@@ -44,32 +44,54 @@ int create_mass_matrix( const double Je, const int NGlob, double *mass_vector)
 
 	int node_list[NGLLX*NGLLZ*2];
 	memset(node_list, 0, 2*NGLLX*NGLLZ*sizeof(int));
-	// ele_to_node(0, 0, node_list);
 
-	for(int rei = 0; rei < 3; rei ++){
+	// FILE *fp = fopen("node","w");
+	for(int rei = 0; rei < NZ; rei ++){
 		for(int cei = 0; cei < NX; cei ++){
 			memset(node_list, 0, 2*NGLLX*NGLLZ*sizeof(int));
 			ele_to_node(rei,cei, node_list);
+			for (int i = 0; i < NGLLX*NGLLZ*2; ++i)
+			{
+				mass_vector[node_list[i]] += mass_ele[i];
+			}
 
+			/*			
 			for(int i=0; i< NSPEC+1; i++){
-				putchar('\n');
+				fputc('\n',fp);
 				for(int j=0; j< NSPEC +1; j++){
-					printf("%d\t",node_list[i*(NSPEC+1)*2+j*2]);
+					fprintf(fp, "%5d\t\t\t",node_list[i*(NSPEC+1)*2+j*2]);
 				}
-				putchar('\n');
+				fputc('\n',fp);
 				for(int j=0; j< NSPEC +1; j++){
-					printf("%d\t",node_list[i*(NSPEC+1)*2+j*2+1]);
+					fprintf(fp, "%5d\t\t\t",node_list[i*(NSPEC+1)*2+j*2+1]);
 				} 
 			}
-			putchar('\n');
+			fputc('\n',fp);*/
 		}
 		
 	}
+	int index = 0;
+	FILE *fp = fopen("mass","w");
+	for(int i = 0; i < (NZ*(NGLLZ-1)+1); ++i){
+		fputc('\n',fp);
+		for (int j = 0; j < (NX*(NGLLX-1)+1); ++j)
+		{
+			fprintf(fp,"%10e\t",mass_vector[index+j*2]);
+		}
+		fputc('\n',fp);
+		for (int j = 0; j < (NX*(NGLLX-1)+1); ++j)
+		{
+			fprintf(fp, "%10e\t",mass_vector[index+j*2+1]);
+		}
+		index += (NX*(NGLLX-1)+1)*2;
+	}
+	fclose(fp);
+	// fclose(fp);
 	return 1;
 }
 int ele_to_node(int rei,int cei, int *node_list )
 {
-	int lu_inx =  rei*NGLLZ*(NX*(NGLLX-1)+1)*2 + cei*(NGLLX-1)*2;
+	int lu_inx =  rei*(NGLLZ-1)*(NX*(NGLLX-1)+1)*2 + cei*(NGLLX-1)*2;
 	int tmp_idx = 0;
 	for (int i = 0; i < NGLLZ; ++i){
 		for (int j = 0; j < NGLLX; ++j)
