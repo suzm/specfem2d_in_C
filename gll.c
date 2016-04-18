@@ -42,6 +42,19 @@ double legendre(double x)
 	}
 	return res;
 }
+
+void lagrange_derivative(double *gll_p, double *lag_deriva)
+{
+	for (int i = 0; i <=  NSPEC; ++i)
+	{
+		for (int j = 0; j <= NSPEC; ++j)
+		{
+			 ;
+
+		}
+		
+	}
+}
 // int *gll_weights(int order)
 // int main(int argc, char const *argv[])
 // {
