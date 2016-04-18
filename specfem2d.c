@@ -2,7 +2,9 @@
 
 int main(int argc, char const *argv[])
 {
-	const int NGlob = (NX*(NSPEC-1)+1)*(NZ*(NSPEC-1)+1);
+	// const int NGLLX = NSPEC+1;
+	// const int NGLLZ = NSPEC +1;
+	const int NGlob = (NX*(NGLLX-1)+1)*(NZ*(NGLLZ-1)+1);
 	const double Je = (double) XWIDTH/NX/2;
 	printf("%e\n",Je );
 	printf("Total node number is %d\n",NGlob);
