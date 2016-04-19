@@ -1,9 +1,6 @@
 #include "specfem2d.h"
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w)
 {
-	
-		
-
 	double gll_loc_4[5] = {-1, -0.6546536707, 0, 0.6546536707, 1};
 	double gll_loc_5[6] = {-1, -0.7650553239, -0.2852315164, 0.2852315164, 0.7650553239,1};
     double gll_loc_6[7] = {-1, -0.8302238962, -0.4688487934, 0, 0.4688487934, 0.8302238962, 1};
@@ -30,9 +27,11 @@ double legendre(double x)
 	double res = 0;
 	switch (NSPEC) {
 		case 0: 
-			res = 1; break;
+			res = 1; 
+			break;
 		case 1: 
-			res = x; break;
+			res = x; 
+			break;
 		default: 
 			legen_list[0] = 1; 
 			legen_list[1] = x;
@@ -43,16 +42,26 @@ double legendre(double x)
 	return res;
 }
 
-void lagrange_derivative(double *gll_p, double *lag_deriva)
+void lagrange_derivative(double *gll_p, double (*lag_deriva)[NSPEC+1])
 {
-	for (int i = 0; i <=  NSPEC; ++i)
+	for (int k = 0; k <=  NSPEC; ++k)
 	{
-		for (int j = 0; j <= NSPEC; ++j)
-		{
-			 ;
-
+		switch(k){
+			case 0: 
+				lag_deriva[k][k] = -NSPEC*(NSPEC + 1)/4;
+				break;
+			case NSPEC:
+				lag_deriva[k][k] = NSPEC*(NSPEC + 1)/4;
+				break;
+			default:
+				lag_deriva[k][k] = 0;
+				break;
 		}
-		
+		for (int j = 0; j < k; ++j)
+		{
+			lag_deriva[k][j] = legendre(gll_p[k])/(legendre(gll_p[j])*(gll_p[k]-gll_p[j]));
+			lag_deriva[j][k] = legendre(gll_p[j])/(legendre(gll_p[k])*(gll_p[j]-gll_p[k]));
+		}
 	}
 }
 // int *gll_weights(int order)
