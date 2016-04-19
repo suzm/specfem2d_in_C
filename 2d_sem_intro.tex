@@ -65,6 +65,20 @@ Let's build the mass matrix $M$ first. According the quadrature, we can know tha
 \end{aligned}
 \end{equation}
 
+Now, Let's consider how to build the stiffness matrix. We can start from a local integration. The first step is to construct the stress tensor $\boldsymbol T$. To compute this term, we need the strain tensor first. 
+\begin{equation}
+\begin{aligned}
+ \partial_i s(\boldsymbol x(\xi_\alpha,\eta_\beta),t) &\approx \partial_i\left[s_j^{\alpha\beta}\sum_{\alpha,\beta}^{n_\ell}\ell_\alpha(\xi_\alpha)\ell_\beta(\eta_\beta)\right]\\
+						 &= \left[\sum_\sigma^{n_\ell}s_j^{\sigma\beta}(t)\ell_\sigma'(\xi_\alpha)\right]\partial_i\xi(\xi_\alpha,\eta_\beta)\\
+						 &\qquad +\left[\sum_\sigma^{n_\ell}s_j^{\alpha\sigma}(t)\ell_\sigma'(\eta_\beta)\right]\partial_i\eta(\xi_\alpha,\eta_\beta)
+\end{aligned}
+ \end{equation}
+And the stress tensor $\boldsymbol T$ is obtained by the following.
+\begin{equation}
+ \boldsymbol T(\boldsymbol x(\xi_\alpha,\eta_\beta),t)=\boldsymbol c:\boldsymbol \nabla \boldsymbol s(\boldsymbol x(\xi_\alpha, \eta_\beta),t).
+\end{equation}
+where $\boldsymbol c$ denotes the stress-strain tensor, is a forth order tensor.
+
 
 
 
