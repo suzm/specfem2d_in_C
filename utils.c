@@ -15,7 +15,7 @@ int ele_to_node(int rei,int cei, int *node_list )
 	return 1;
 }
 
-void copy_nodes_Val(double *origin_l, double *target_l, int *node_l, int length)
+void copy_by_list(double *origin_l, double *target_l, int *node_l, int length)
 {
 	for (int i = 0; i < length; ++i)
 		target_l[i] = origin_l[node_l[i]];
