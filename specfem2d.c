@@ -7,14 +7,14 @@ int main(int argc, char const *argv[])
 	const int NGlob = (NX*(NGLLX-1)+1)*(NZ*(NGLLZ-1)+1);
 	const double Je = (double) XWIDTH/NX/2;
 	printf("%e\n",Je );
-	printf("Total node number is %d\n",NGlob)
-;
+	printf("Total node number is %d\n",NGlob);
+
 	// Create displacement vector
 	double u[NGlob*2];
-	memset(u, 0, NGlob*2*sizeof(double))
-;	
+	memset(u, 0, NGlob*2*sizeof(double));
+
 	double source_f[NGlob*2];
-	memset(source_f, 2, NGlob*2*sizeof(double));
+	memset(source_f, 0, NGlob*2*sizeof(double));	
 	// Create mass matrix
 	double mass_vector[NGlob *2 ];
 	memset(mass_vector, 0, NGlob*2*sizeof(double));
@@ -40,15 +40,13 @@ int main(int argc, char const *argv[])
 			create_stiff(ele_stif_res, ele_displ);
 			for (int i = 0; i < 2*NGLLX*NGLLZ; ++i)
 			{
-				// prin
-				tf("%e\t%d\n", ele_stif_res[i],i);
+				// printf("%e\t%d\n", ele_stif_res[i],i);
 				stif_vector[ele_nodes[i]] += ele_stif_res[i];
 			}
 
 		}
+
 	}
-
-
 
 	//The following codes are used to test lagrange first order derivative.
 	double gll_p[NSPEC+1], gll_w[NSPEC+1], deriva[NSPEC+1][NSPEC+1];
