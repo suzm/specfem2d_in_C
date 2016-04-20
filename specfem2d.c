@@ -45,18 +45,18 @@ int main(int argc, char const *argv[])
 
 	}
 
-	/* The following codes are used to test lagrange first order derivative.
-	// double gll_p[NSPEC+1], gll_w[NSPEC+1], deriva[NSPEC+1][NSPEC+1];
-	// get_gll_points_weight(NSPEC, gll_p, gll_w);
-	// lagrange_derivative(gll_p, deriva);
-	// for (int i = 0; i <= NSPEC; ++i)
-	// {
-	// 	for (int j = 0; j <= NSPEC; ++j)
-	// 	{
-	// 		printf("%10f\t", deriva[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
-	*/
+	//The following codes are used to test lagrange first order derivative.
+	double gll_p[NSPEC+1], gll_w[NSPEC+1], deriva[NSPEC+1][NSPEC+1];
+	get_gll_points_weight(NSPEC, gll_p, gll_w);
+	lagrange_derivative(gll_p, deriva);
+	for (int i = 0; i <= NSPEC; ++i)
+	{
+		for (int j = 0; j <= NSPEC; ++j)
+		{
+			printf("%10f\t", deriva[i][j]);
+		}
+		printf("\n");
+	}
+	
 	return 0;
 }

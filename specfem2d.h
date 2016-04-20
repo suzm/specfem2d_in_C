@@ -10,6 +10,8 @@
 #define NZ 60
 #define NGLLX 5
 #define NGLLZ 5
+#define J 2
+#define JINV 0.5
 
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
 double legendre(double x);
