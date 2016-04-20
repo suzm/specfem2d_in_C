@@ -38,7 +38,8 @@ int main(int argc, char const *argv[])
 			create_stiff(ele_stif_res, ele_displ);
 			for (int i = 0; i < 2*NGLLX*NGLLZ; ++i)
 			{
-				// printf("%e\t%d\n", ele_stif_res[i],i);
+				// prin
+				tf("%e\t%d\n", ele_stif_res[i],i);
 				stif_vector[ele_nodes[i]] += ele_stif_res[i];
 			}
 
