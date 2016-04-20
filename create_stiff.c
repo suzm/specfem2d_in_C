@@ -2,6 +2,8 @@
 
 void get_stress(double *displ, double (*stress)[4], double (*deriva)[NSPEC+1]);
 
+void build_stiff(double gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1]);
+
 void create_stiff(double *stiff_res, double *displ)
 {
 	// partial_disp(double *displ);
@@ -56,6 +58,9 @@ void get_stress(double *displ, double (*stress)[4],  double (*deriva)[NSPEC+1])
 			++ node_index;
 		}
 	}
+}
 
-
+void build_stiff(double gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1])
+{
+	;
 }
