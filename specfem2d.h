@@ -12,6 +12,8 @@
 #define NGLLZ 5
 #define J 2
 #define JINV 0.5
+#define LAMBDA 38
+#define MU 32
 
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
 double legendre(double x);
