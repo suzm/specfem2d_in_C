@@ -13,6 +13,8 @@ int main(int argc, char const *argv[])
 	double u[NGlob*2];
 	memset(u, 0, NGlob*2*sizeof(double))
 ;	
+	double source_f[NGlob*2];
+	memset(source_f, 2, NGlob*2*sizeof(double));
 	// Create mass matrix
 	double mass_vector[NGlob *2 ];
 	memset(mass_vector, 0, NGlob*2*sizeof(double));
@@ -44,8 +46,9 @@ int main(int argc, char const *argv[])
 			}
 
 		}
-
 	}
+
+
 
 	//The following codes are used to test lagrange first order derivative.
 	double gll_p[NSPEC+1], gll_w[NSPEC+1], deriva[NSPEC+1][NSPEC+1];
