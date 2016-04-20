@@ -15,6 +15,7 @@
 #define LAMBDA 38
 #define MU 32
 
+
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
 double legendre(double x);
 int create_mass( const double Je, const int NGlob, double *mass_vector);
