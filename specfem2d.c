@@ -22,11 +22,11 @@ int main(int argc, char const *argv[])
 	double stif_vector[NGlob * 2];
 	memset(stif_vector, 0, NGlob*2*sizeof(double));
 
-	double ele_stif_res[NX*NZ*2];
-	memset(ele_stif_res, 0, 2*NX*NZ*sizeof(double));
+	double ele_stif_res[NGLLX*NGLLZ*2];
+	memset(ele_stif_res, 0, 2*NGLLX*NGLLZ*sizeof(double));
 
-	double ele_displ[NX*NZ*2];
-	memset(ele_displ, 0, 2*NX*NZ*sizeof(double));
+	double ele_displ[NGLLX*NGLLZ*2];
+	memset(ele_displ, 0, 2*NGLLX*NGLLZ*sizeof(double));
 
 	int ele_nodes[NGLLX*NGLLZ*2];
 	for (int rei = 0; rei < NX; ++rei)
@@ -34,10 +34,11 @@ int main(int argc, char const *argv[])
 		for(int cei = 0; cei < NZ; ++cei){
 			memset(ele_nodes, 0, 2*NGLLX*NGLLZ*sizeof(int));
 			ele_to_node(rei, cei, ele_nodes);
-			copy_by_list(u, ele_displ, ele_nodes, NX*NZ);
+			copy_by_list(u, ele_displ, ele_nodes, NGLLX*NGLLZ);
 			create_stiff(ele_stif_res, ele_displ);
-			for (int i = 0; i < NX*NZ; ++i)
+			for (int i = 0; i < 2*NGLLX*NGLLZ; ++i)
 			{
+				// printf("%e\t%d\n", ele_stif_res[i],i);
 				stif_vector[ele_nodes[i]] += ele_stif_res[i];
 			}
 

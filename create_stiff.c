@@ -2,7 +2,7 @@
 
 void get_stress(double *displ, double (*stress)[4], double (*deriva)[NSPEC+1]);
 
-void build_stiff(double gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1]);
+void build_stiff(double *gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1]);
 
 void create_stiff(double *stiff_res, double *displ)
 {
@@ -12,6 +12,7 @@ void create_stiff(double *stiff_res, double *displ)
 	lagrange_derivative(gll_p, deriva);
 	double stress[NGLLX*NGLLZ][4];
 	get_stress(displ, stress, deriva);
+	build_stiff(gll_w, stiff_res, stress, deriva);
 }
 
 void get_stress(double *displ, double (*stress)[4],  double (*deriva)[NSPEC+1])
@@ -60,7 +61,40 @@ void get_stress(double *displ, double (*stress)[4],  double (*deriva)[NSPEC+1])
 	}
 }
 
-void build_stiff(double gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1])
+void build_stiff(double *gll_w, double *stiff_res, double (*stress)[4], double (*deriva)[NSPEC+1])
 {
-	;
+	int node_index = 0;
+	for (int rei = 0; rei < NGLLZ; ++rei)
+	{
+		for (int cei = 0; cei < NGLLX; ++cei)
+		{
+			stress[node_index][0] *= JINV;
+			stress[node_index][1] *= JINV;
+			stress[node_index][2] *= JINV;
+			stress[node_index][3] *= JINV;
+			++ node_index;
+		}
+	}
+	
+	node_index = 0;
+	for (int rei = 0; rei < NGLLZ; ++rei){
+		for (int cei = 0; cei < NGLLX; ++cei){
+			stiff_res[node_index] = 0;
+			for (int t = 0; t < NGLLX; ++t)
+			{
+				stiff_res[node_index] += gll_w[rei]*gll_w[t]*J*J*stress[node_index][0]*deriva[cei][t];
+				stiff_res[node_index] += gll_w[cei]*gll_w[t]*J*J*stress[node_index][2]*deriva[rei][t];
+			}
+			++ node_index;
+
+			stiff_res[node_index] = 0;
+			for (int t = 0; t < NGLLX; ++t)
+			{
+				stiff_res[node_index] += gll_w[rei]*gll_w[t]*J*J*stress[node_index][1]*deriva[cei][t];
+				stiff_res[node_index] += gll_w[cei]*gll_w[t]*J*J*stress[node_index][3]*deriva[rei][t];
+			}
+			++ node_index;
+		}
+	}
+	
 }
