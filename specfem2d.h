@@ -14,7 +14,8 @@
 #define JINV 0.5
 #define LAMBDA 38
 #define MU 32
-
+#define S_LOC 120
+#define fM 20
 
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
 double legendre(double x);
@@ -23,3 +24,4 @@ void create_stiff(double *stiff_res, double *displ);
 int ele_to_node(int rei, int cei, int *node_list );
 void lagrange_derivative(double *gll_p, double (*lag_deriva)[NSPEC+1]);
 void copy_by_list(double *origin_l, double *target_l, int *node_l, int length);
+void add_source(double *soue, double dt, int time_n);

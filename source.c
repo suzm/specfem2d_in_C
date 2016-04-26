@@ -1,23 +1,24 @@
 #include "specfem2d.h"
 // #include <math.h>
 // #define M_PI 3.1415926
-void ricker(int nt, double  dt, double fM, double *source)
+double ricker(int nt, double  dt)
 {
 	// double fM = 100;
 	double temp = 0;
-	for (int i = 0; i < nt; ++i)
-	{
-		temp = M_PI*fM*dt*(i-100);
+	// for (int i = 0; i < nt; ++i)
+	// {
+		temp = M_PI*fM*dt*(nt-100);
 		temp *= temp;
-		source[i] = (1-2*temp)*exp(-temp);	
-	}
+		return (1-2*temp)*exp(-temp);	
+	// }
+
 }
 
 
-void add_source(double source*, double dt, int time_n, int source_loc)
+void add_source(double *source, double dt, int time_n)
 {
-	source[source_loc*2] = ricker[time_n];
-	sourcep[source_loc*2+1] = ricker[time_n]
+	source[S_LOC*2] = ricker(time_n, dt);
+	source[S_LOC*2+1] = ricker(time_n, dt);
 }
 
 

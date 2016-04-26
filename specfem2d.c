@@ -46,6 +46,13 @@ int main(int argc, char const *argv[])
 		}
 
 	}
+	double dt = 0.01;
+	int time_n = 10;
+	add_source(stif_vector, dt, time_n);
+	for(int i=0 ; i < 2*NGlob; i++)
+		stif_vector[i] /= mass_vector[i];
+
+
 
 	//The following codes are used to test lagrange first order derivative.
 	double gll_p[NSPEC+1], gll_w[NSPEC+1], deriva[NSPEC+1][NSPEC+1];
