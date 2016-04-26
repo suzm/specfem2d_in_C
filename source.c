@@ -13,6 +13,14 @@ void ricker(int nt, double  dt, double fM, double *source)
 	}
 }
 
+
+void add_source(double source*, double dt, int time_n, int source_loc)
+{
+	source[source_loc*2] = ricker[time_n];
+	sourcep[source_loc*2+1] = ricker[time_n]
+}
+
+
 // int main(int argc, char const *argv[])
 // {
 // 	int nt = 1000; 
