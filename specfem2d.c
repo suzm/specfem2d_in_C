@@ -28,6 +28,9 @@ int main(int argc, char const *argv[])
 	double stif_vector[NGlob * 2];
 	memset(stif_vector, 0, NGlob*2*sizeof(double));
 
+	double vel[NGlob * 2];
+	memset(vel, 0, NGlob*2*sizeof(double));
+
 	double ele_stif_res[NGLLX*NGLLZ*2];
 	memset(ele_stif_res, 0, 2*NGLLX*NGLLZ*sizeof(double));
 
@@ -35,11 +38,18 @@ int main(int argc, char const *argv[])
 	memset(ele_displ, 0, 2*NGLLX*NGLLZ*sizeof(double));
 
 	int ele_nodes[NGLLX*NGLLZ*2];
-	memset(ele_nodes, 0, 2*NGLLX*NGLLZ*2);
+	memset(ele_nodes, 0, 2*NGLLX*NGLLZ*sizeof(int));
+
+
 
 	for(int time_n = 0; time_n < 1000; time_n++){
 		// Start time loop 
 		printf("%d\n",time_n );
+		for (int i = 0; i < 2*NGlob; ++i){
+			u[i] = dt*vel[i] + stif_vector[i]*dt*dt/2;
+			vel[i] += dt*stif_vector[i]/2;
+		}
+
 		for (int rei = 0; rei < NX; ++rei)
 		{
 			for(int cei = 0; cei < NZ; ++cei){
@@ -59,7 +69,15 @@ int main(int argc, char const *argv[])
 		for(int i=0 ; i < 2*NGlob; i++)
 			stif_vector[i] /= mass_vector[i];
 
+		for (int i = 0; i < 2*NGlob; ++i)
+			vel[i] += dt/2*stif_vector[i];
+
+
+
 	}
+
+
+	
 
 
 	//The following codes are used to test lagrange first order derivative.
