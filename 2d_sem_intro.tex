@@ -1,11 +1,13 @@
-  \documentclass{book}
+  \documentclass{article}
   \usepackage{amsmath}
   \usepackage{mathrsfs}
-  \titlepage
-  \title{2D Spectral Element Method}
+
+  \title{A brief introduction to 2D Spectral Element Method and programing guide written in C}
   \begin{document}
-  %\chapter{}
-  %\section{General Introduciton}
+  \maketitle
+    \titlepage
+
+  \section{General Introduciton}
   The primary goal of this introduction is to demonstrate how to implement spectral element method in 2d. We seek to produce the displacement field caused by an earthquake in a finite earth model with volume $\Omega$. In order to simplify calculation, we just use stress-free boundary condition.  We will  talk about artificial absorbing  boundary condition in detail later.
   The displacement field $\boldsymbol{u}$ is produced by an earthquake is governed by the momentum equation,
   \begin{equation}
