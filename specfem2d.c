@@ -6,6 +6,10 @@ int main(int argc, char const *argv[])
 	// const int NGLLZ = NSPEC +1;
 	const int NGlob = (NX*(NGLLX-1)+1)*(NZ*(NGLLZ-1)+1);
 	const double Je = (double) XWIDTH/NX/2;
+
+	double  vp = sqrt((LAMBDA+2*MU)/RHO);
+	double  dx = XWIDTH/NX;
+	double 	dt = dx*0.9/vp;
 	printf("%e\n",Je );
 	printf("Total node number is %d\n",NGlob);
 
@@ -31,27 +35,31 @@ int main(int argc, char const *argv[])
 	memset(ele_displ, 0, 2*NGLLX*NGLLZ*sizeof(double));
 
 	int ele_nodes[NGLLX*NGLLZ*2];
-	for (int rei = 0; rei < NX; ++rei)
-	{
-		for(int cei = 0; cei < NZ; ++cei){
-			memset(ele_nodes, 0, 2*NGLLX*NGLLZ*sizeof(int));
-			ele_to_node(rei, cei, ele_nodes);
-			copy_by_list(u, ele_displ, ele_nodes, NGLLX*NGLLZ);
-			create_stiff(ele_stif_res, ele_displ);
-			for (int i = 0; i < 2*NGLLX*NGLLZ; ++i)
-			{
-				stif_vector[ele_nodes[i]] += ele_stif_res[i];
+	memset(ele_nodes, 0, 2*NGLLX*NGLLZ*2);
+
+	for(int time_n = 0; time_n < 1000; time_n++){
+		// Start time loop 
+		printf("%d\n",time_n );
+		for (int rei = 0; rei < NX; ++rei)
+		{
+			for(int cei = 0; cei < NZ; ++cei){
+				memset(ele_nodes, 0, 2*NGLLX*NGLLZ*sizeof(int));
+				ele_to_node(rei, cei, ele_nodes);
+				copy_by_list(u, ele_displ, ele_nodes, NGLLX*NGLLZ);
+				create_stiff(ele_stif_res, ele_displ);
+				for (int i = 0; i < 2*NGLLX*NGLLZ; ++i)
+				{
+					stif_vector[ele_nodes[i]] += ele_stif_res[i];
+				}
+
 			}
 
 		}
+		add_source(stif_vector, dt, time_n);
+		for(int i=0 ; i < 2*NGlob; i++)
+			stif_vector[i] /= mass_vector[i];
 
 	}
-	double dt = 0.01;
-	int time_n = 10;
-	add_source(stif_vector, dt, time_n);
-	for(int i=0 ; i < 2*NGlob; i++)
-		stif_vector[i] /= mass_vector[i];
-
 
 
 	//The following codes are used to test lagrange first order derivative.

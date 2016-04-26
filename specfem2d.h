@@ -15,7 +15,7 @@
 #define LAMBDA 38
 #define MU 32
 #define S_LOC 120
-#define fM 20
+#define fM 20 
 
 int  get_gll_points_weight(int order, double *gll_p, double *gll_w);
 double legendre(double x);
